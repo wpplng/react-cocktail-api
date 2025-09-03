@@ -1,7 +1,12 @@
-import LandingPage from './pages/LandingPage';
+import { Container } from '@mui/material';
+import { Outlet } from 'react-router';
 
 function App() {
-  return <LandingPage />;
+  return (
+    <Container sx={{ mt: 4 }}>
+      <Outlet />
+    </Container>
+  );
 }
 
 export default App;

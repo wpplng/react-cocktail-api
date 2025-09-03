@@ -1,5 +1,5 @@
 import { mapRawCocktailData } from './mapRawCocktailData';
-import type { ICocktail } from './mapRawCocktailData';
+import type { ICocktail } from '../utilities/types';
 
 export const fetchRandomCocktail = async (): Promise<ICocktail> => {
   const res = await fetch(

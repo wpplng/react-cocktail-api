@@ -6,7 +6,7 @@ import {
   Typography,
   Button,
 } from '@mui/material';
-import type { ICocktail } from '../../api/mapRawCocktailData';
+import type { ICocktail } from '../../utilities/types';
 
 interface CocktailCardProps {
   cocktail: ICocktail;
