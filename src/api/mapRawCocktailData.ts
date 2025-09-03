@@ -1,19 +1,4 @@
-interface IIngredient {
-  ingredient: string;
-  measure: string | null;
-}
-
-export interface ICocktail {
-  id: string;
-  name: string;
-  tags: string[];
-  category: string;
-  alcoholic: boolean;
-  glass: string;
-  instructions: string;
-  thumbnail: string;
-  ingredients: IIngredient[];
-}
+import type { ICocktail } from '../utilities/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function mapRawCocktailData(rawCocktail: any): ICocktail {

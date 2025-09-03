@@ -8,7 +8,7 @@ import {
   Box,
 } from '@mui/material';
 import { fetchRandomCocktail } from '../api/cocktailApi';
-import type { ICocktail } from '../api/mapRawCocktailData';
+import type { ICocktail } from '../utilities/types';
 import CocktailCard from '../components/Cocktail/CocktailCard';
 
 const LandingPage = (): ReactElement => {
