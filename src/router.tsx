@@ -3,7 +3,7 @@ import App from './App';
 import LandingPage from './pages/LandingPage';
 import SearchPage from './pages/SearchPage';
 import CocktailInfoPage from './pages/CocktailInfoPage';
-import { fetchRandomCocktail } from './api/cocktailApi';
+import { fetchCocktailById, fetchRandomCocktail } from './api/cocktailApi';
 import { Loader } from './components/UI/Loader';
 
 export const router = createBrowserRouter([
@@ -26,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: 'cocktail/:id',
         element: <CocktailInfoPage />,
+        loader: async ({ params }) => {
+          if (!params.id) throw new Error('Missing cocktail id');
+          return await fetchCocktailById(params.id);
+        },
       },
     ],
   },

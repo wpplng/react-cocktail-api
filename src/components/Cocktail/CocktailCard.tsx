@@ -7,6 +7,7 @@ import {
   Button,
 } from '@mui/material';
 import type { ICocktail } from '../../utilities/types';
+import { Link } from 'react-router';
 
 interface CocktailCardProps {
   cocktail: ICocktail;
@@ -30,7 +31,13 @@ const CocktailCard = ({ cocktail }: CocktailCardProps): ReactElement => {
           {cocktail.alcoholic ? 'Alcoholic' : 'Non-alcoholic'}
         </Typography>
       </CardContent>
-      <Button size='small' sx={{ m: 1 }}>
+      <Button
+        component={Link}
+        to={`/cocktail/${cocktail.id}`}
+        state={{ fromComponent: true }}
+        size='small'
+        sx={{ m: 1 }}
+      >
         See more
       </Button>
     </Card>
