@@ -3,7 +3,11 @@ import App from './App';
 import LandingPage from './pages/LandingPage';
 import SearchPage from './pages/SearchPage';
 import CocktailInfoPage from './pages/CocktailInfoPage';
-import { fetchCocktailById, fetchRandomCocktail } from './api/cocktailApi';
+import {
+  fetchCocktailById,
+  fetchRandomCocktail,
+  searchCocktails,
+} from './api/cocktailApi';
 import { Loader } from './components/UI/Loader';
 
 export const router = createBrowserRouter([
@@ -22,6 +26,12 @@ export const router = createBrowserRouter([
       {
         path: 'search',
         element: <SearchPage />,
+        action: async ({ request }: { request: Request }) => {
+          const formData = await request.formData();
+          const query = formData.get('query') as string;
+          if (!query) return [];
+          return await searchCocktails(query);
+        },
       },
       {
         path: 'cocktail/:id',

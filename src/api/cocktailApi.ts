@@ -18,3 +18,13 @@ export const fetchCocktailById = async (id: string): Promise<ICocktail> => {
   const data = await res.json();
   return mapRawCocktailData(data.drinks[0]);
 };
+
+export const searchCocktails = async (query: string): Promise<ICocktail[]> => {
+  const res = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`
+  );
+  if (!res.ok) throw new Error('Failed to search cocktails');
+  const data = await res.json();
+  if (!data.drinks) return [];
+  return data.drinks.map(mapRawCocktailData);
+};
