@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Container sx={{ mt: 4 }}>
+      <Container maxWidth='md' sx={{ mt: 4 }}>
         <Outlet />
       </Container>
     </>
