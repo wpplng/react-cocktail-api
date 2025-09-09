@@ -1,8 +1,9 @@
-import type { ReactElement } from 'react';
+import { type ReactElement } from 'react';
 import { Navigate, useLoaderData, useLocation } from 'react-router';
 import type { ICocktail } from '../utilities/types';
 import {
   Box,
+  Button,
   Chip,
   Divider,
   Grid,
@@ -12,9 +13,13 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import { useFavorites } from '../context/useFavorites';
 
 const CocktailInfoPage = (): ReactElement => {
   const cocktail = useLoaderData() as ICocktail;
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
+  // FIXME: Move to context provider
+  const isFavorite = favorites.some((c) => c.id === cocktail.id);
   const location = useLocation();
 
   if (!location.state) {
@@ -41,6 +46,17 @@ const CocktailInfoPage = (): ReactElement => {
           <Typography variant='h4' gutterBottom>
             {cocktail.name}
           </Typography>
+
+          {/* FIXME: Change to icon */}
+          <Button
+            variant={isFavorite ? 'contained' : 'outlined'}
+            color={isFavorite ? 'secondary' : 'primary'}
+            onClick={() =>
+              isFavorite ? removeFavorite(cocktail.id) : addFavorite(cocktail)
+            }
+          >
+            {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+          </Button>
 
           <Typography variant='subtitle1' color='text.secondary' gutterBottom>
             {cocktail.category} •{' '}

@@ -34,6 +34,20 @@ const Navbar = (): ReactElement => {
             <Button
               color='inherit'
               component={NavLink}
+              to='/favorites'
+              sx={{
+                '&.active': {
+                  borderBottom: '2px solid white',
+                  borderRadius: '0',
+                  fontWeight: 'bold',
+                },
+              }}
+            >
+              Favorites
+            </Button>
+            <Button
+              color='inherit'
+              component={NavLink}
               to='/search'
               sx={{
                 '&.active': {

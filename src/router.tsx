@@ -10,7 +10,9 @@ import {
 } from './api/cocktailApi';
 import { Loader } from './components/UI/Loader';
 import { ErrorMessage } from './components/UI/ErrorMessage';
+import FavoritesPage from './pages/FavoritesPage';
 
+// FIXME: Move loaders and actions to another file
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -24,6 +26,10 @@ export const router = createBrowserRouter([
         loader: async () => {
           return await fetchRandomCocktail();
         },
+      },
+      {
+        path: 'favorites',
+        element: <FavoritesPage />,
       },
       {
         path: 'search',
