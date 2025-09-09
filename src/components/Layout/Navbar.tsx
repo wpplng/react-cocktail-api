@@ -17,10 +17,32 @@ const Navbar = (): ReactElement => {
           </Typography>
 
           <Box>
-            <Button color='inherit' component={NavLink} to='/'>
+            <Button
+              color='inherit'
+              component={NavLink}
+              to='/'
+              sx={{
+                '&.active': {
+                  borderBottom: '2px solid white',
+                  borderRadius: '0',
+                  fontWeight: 'bold',
+                },
+              }}
+            >
               Home
             </Button>
-            <Button color='inherit' component={NavLink} to='/search'>
+            <Button
+              color='inherit'
+              component={NavLink}
+              to='/search'
+              sx={{
+                '&.active': {
+                  borderBottom: '2px solid white',
+                  borderRadius: '0',
+                  fontWeight: 'bold',
+                },
+              }}
+            >
               Search
             </Button>
           </Box>
