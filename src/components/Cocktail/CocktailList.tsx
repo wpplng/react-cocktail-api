@@ -1,7 +1,9 @@
 import { useState, type ReactElement } from 'react';
 import type { ICocktail } from '../../utilities/types';
-import { Box, List, ListItem, ListItemButton, Pagination } from '@mui/material';
+import { Box, List, ListItem, ListItemButton } from '@mui/material';
 import { Link } from 'react-router';
+import { Pagination } from '../UI/Pagination';
+import { itemsPerPage } from '../../utilities/constants';
 
 interface CocktailListProps {
   results: ICocktail[];
@@ -9,12 +11,15 @@ interface CocktailListProps {
 
 const CocktailList = ({ results }: CocktailListProps): ReactElement => {
   const [page, setPage] = useState(1);
-  const itemsPerPage = 10;
 
   const paginated = results.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
+
+  const handleSetPage = (value: number) => {
+    setPage(value);
+  };
 
   return (
     <Box mt={3}>
@@ -33,12 +38,7 @@ const CocktailList = ({ results }: CocktailListProps): ReactElement => {
       </List>
 
       {results.length > itemsPerPage && (
-        <Pagination
-          count={Math.ceil(results.length / itemsPerPage)}
-          page={page}
-          onChange={(_, value) => setPage(value)}
-          sx={{ mt: 2 }}
-        />
+        <Pagination results={results} page={page} onChange={handleSetPage} />
       )}
     </Box>
   );
