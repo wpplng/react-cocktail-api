@@ -9,12 +9,14 @@ import {
   searchCocktails,
 } from './api/cocktailApi';
 import { Loader } from './components/UI/Loader';
+import { ErrorMessage } from './components/UI/ErrorMessage';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     hydrateFallbackElement: <Loader />,
+    errorElement: <ErrorMessage />,
     children: [
       {
         index: true,
