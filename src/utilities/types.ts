@@ -14,3 +14,9 @@ export interface ICocktail {
   thumbnail: string;
   ingredients: IIngredient[];
 }
+
+export interface IFavoritesContext {
+  favorites: ICocktail[];
+  addFavorite: (cocktail: ICocktail) => void;
+  removeFavorite: (id: string) => void;
+}
