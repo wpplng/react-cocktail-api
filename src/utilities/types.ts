@@ -19,4 +19,6 @@ export interface IFavoritesContext {
   favorites: ICocktail[];
   addFavorite: (cocktail: ICocktail) => void;
   removeFavorite: (id: string) => void;
+  checkIfFavorite: (cocktail: ICocktail) => boolean;
+  toggleFavorite: (cocktail: ICocktail) => void;
 }

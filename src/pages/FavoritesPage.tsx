@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import { Link } from 'react-router';
 import {
+  Box,
   Card,
   CardContent,
   CardMedia,
@@ -8,6 +9,7 @@ import {
   Button,
   Grid,
 } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useFavorites } from '../context/useFavorites';
 import type { IFavoritesContext } from '../utilities/types';
 
@@ -26,7 +28,7 @@ const FavoritesPage = (): ReactElement => {
     <Grid container spacing={3} sx={{ p: 3 }}>
       {favorites.map((cocktail) => (
         <Grid size={{ xs: 12, md: 4, sm: 6 }} key={cocktail.id}>
-          <Card>
+          <Card sx={{ margin: 'auto' }}>
             <CardMedia
               component='img'
               height='200'
@@ -34,20 +36,23 @@ const FavoritesPage = (): ReactElement => {
               alt={cocktail.name}
             />
             <CardContent>
-              <Typography variant='h6'>{cocktail.name}</Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Typography variant='h6'>{cocktail.name}</Typography>
+                <FavoriteIcon onClick={() => removeFavorite(cocktail.id)} />
+              </Box>
               <Button
                 component={Link}
                 to={`/cocktail/${cocktail.id}`}
                 state={{ fromComponent: true }}
-                sx={{ mr: 1 }}
+                sx={{ m: 1 }}
               >
                 View
-              </Button>
-              <Button
-                color='secondary'
-                onClick={() => removeFavorite(cocktail.id)}
-              >
-                Remove
               </Button>
             </CardContent>
           </Card>

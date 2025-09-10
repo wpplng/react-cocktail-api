@@ -26,9 +26,26 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
     setFavorites((prev) => prev.filter((c) => c.id !== id));
   };
 
+  const checkIfFavorite = (cocktail: ICocktail): boolean =>
+    favorites.some((c) => c.id === cocktail.id);
+
+  const toggleFavorite = (cocktail: ICocktail): void => {
+    setFavorites((prev) =>
+      prev.some((c) => c.id === cocktail.id)
+        ? prev.filter((c) => c.id !== cocktail.id)
+        : [...prev, cocktail]
+    );
+  };
+
   return (
     <FavoritesContext.Provider
-      value={{ favorites, addFavorite, removeFavorite }}
+      value={{
+        favorites,
+        addFavorite,
+        removeFavorite,
+        checkIfFavorite,
+        toggleFavorite,
+      }}
     >
       {children}
     </FavoritesContext.Provider>

@@ -3,7 +3,6 @@ import { Navigate, useLoaderData, useLocation } from 'react-router';
 import type { ICocktail } from '../utilities/types';
 import {
   Box,
-  Button,
   Chip,
   Divider,
   Grid,
@@ -13,13 +12,13 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useFavorites } from '../context/useFavorites';
 
 const CocktailInfoPage = (): ReactElement => {
   const cocktail = useLoaderData() as ICocktail;
-  const { favorites, addFavorite, removeFavorite } = useFavorites();
-  // FIXME: Move to context provider
-  const isFavorite = favorites.some((c) => c.id === cocktail.id);
+  const { toggleFavorite, checkIfFavorite } = useFavorites();
   const location = useLocation();
 
   if (!location.state) {
@@ -43,20 +42,21 @@ const CocktailInfoPage = (): ReactElement => {
         </Grid>
 
         <Grid size={{ xs: 12, md: 8 }}>
-          <Typography variant='h4' gutterBottom>
-            {cocktail.name}
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <Typography variant='h4'>{cocktail.name}</Typography>
 
-          {/* FIXME: Change to icon */}
-          <Button
-            variant={isFavorite ? 'contained' : 'outlined'}
-            color={isFavorite ? 'secondary' : 'primary'}
-            onClick={() =>
-              isFavorite ? removeFavorite(cocktail.id) : addFavorite(cocktail)
-            }
-          >
-            {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-          </Button>
+            {checkIfFavorite(cocktail) ? (
+              <FavoriteIcon
+                fontSize='large'
+                onClick={() => toggleFavorite(cocktail)}
+              />
+            ) : (
+              <FavoriteBorderIcon
+                fontSize='large'
+                onClick={() => toggleFavorite(cocktail)}
+              />
+            )}
+          </Box>
 
           <Typography variant='subtitle1' color='text.secondary' gutterBottom>
             {cocktail.category} •{' '}
@@ -82,10 +82,30 @@ const CocktailInfoPage = (): ReactElement => {
           </Typography>
           <List dense>
             {cocktail.ingredients.map((ing, index) => (
-              <ListItem key={index}>
+              <ListItem sx={{ paddingLeft: '0' }} key={index}>
                 <ListItemText
-                  primary={`${ing.ingredient}`}
-                  secondary={ing.measure ? ing.measure : ''}
+                  primary={
+                    <Typography
+                      component='span'
+                      variant='body2'
+                      sx={{
+                        color: 'text.primary',
+                        display: 'inline',
+                        marginRight: '1rem',
+                      }}
+                    >
+                      {ing.ingredient}
+                    </Typography>
+                  }
+                  secondary={
+                    <Typography
+                      component='span'
+                      variant='body2'
+                      sx={{ color: 'text.secondary', display: 'inline' }}
+                    >
+                      {ing.measure ? ing.measure : ''}
+                    </Typography>
+                  }
                 />
               </ListItem>
             ))}
