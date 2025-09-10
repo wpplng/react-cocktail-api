@@ -1,64 +1,43 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import type { ReactElement } from 'react';
 import { NavLink } from 'react-router';
+import { navElements } from '../../utilities/constants';
 
 const Navbar = (): ReactElement => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box flexGrow={1}>
       <AppBar position='static'>
         <Toolbar>
           <Typography
             variant='h6'
             component={NavLink}
             to='/'
-            sx={{ flexGrow: 1, textDecoration: 'none', color: 'inherit' }}
+            sx={{
+              flexGrow: 1,
+              textDecoration: 'none',
+              color: 'inherit',
+            }}
           >
             Cocktail Wiki
           </Typography>
-
           <Box>
-            <Button
-              color='inherit'
-              component={NavLink}
-              to='/'
-              sx={{
-                '&.active': {
-                  borderBottom: '2px solid white',
-                  borderRadius: '0',
-                  fontWeight: 'bold',
-                },
-              }}
-            >
-              Home
-            </Button>
-            <Button
-              color='inherit'
-              component={NavLink}
-              to='/favorites'
-              sx={{
-                '&.active': {
-                  borderBottom: '2px solid white',
-                  borderRadius: '0',
-                  fontWeight: 'bold',
-                },
-              }}
-            >
-              Favorites
-            </Button>
-            <Button
-              color='inherit'
-              component={NavLink}
-              to='/search'
-              sx={{
-                '&.active': {
-                  borderBottom: '2px solid white',
-                  borderRadius: '0',
-                  fontWeight: 'bold',
-                },
-              }}
-            >
-              Search
-            </Button>
+            {navElements.map((el) => (
+              <Button
+                key={el.id}
+                color='inherit'
+                component={NavLink}
+                to={el.source}
+                sx={{
+                  '&.active': {
+                    borderBottom: '2px solid white',
+                    borderRadius: '0',
+                    fontWeight: 'bold',
+                  },
+                }}
+              >
+                {el.name}
+              </Button>
+            ))}
           </Box>
         </Toolbar>
       </AppBar>
