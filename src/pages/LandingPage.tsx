@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
+import { useLoaderData, useNavigate } from 'react-router';
 import { Button, Container, Typography, Box } from '@mui/material';
 import type { ICocktail } from '../utilities/types';
 import CocktailCard from '../components/Cocktail/CocktailCard';
-import { useLoaderData, useNavigate } from 'react-router';
 
 const LandingPage = (): ReactElement => {
   const cocktail = useLoaderData() as ICocktail;
@@ -13,8 +13,16 @@ const LandingPage = (): ReactElement => {
   };
 
   return (
-    <Container sx={{ textAlign: 'center', mt: 4 }}>
-      <Typography variant='h3' gutterBottom>
+    <Container
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        mt: 4,
+      }}
+    >
+      <Typography variant='h3' gutterBottom textAlign='center'>
         Cocktail Wiki
       </Typography>
 
@@ -23,7 +31,7 @@ const LandingPage = (): ReactElement => {
       </Button>
 
       {cocktail && (
-        <Box display='flex' justifyContent='center'>
+        <Box>
           <CocktailCard cocktail={cocktail} />
         </Box>
       )}
