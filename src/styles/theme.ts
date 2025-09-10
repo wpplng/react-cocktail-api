@@ -10,4 +10,17 @@ export const theme = createTheme({
       main: indigo[500],
     },
   },
+  typography: {
+    fontFamily: ['Poppins', 'sans-serif'].join(','),
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        @font-face {
+          font-family: 'Poppins';
+          font-style: sans-serif;
+        }
+      `,
+    },
+  },
 });

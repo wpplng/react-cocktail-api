@@ -1,7 +1,6 @@
-import { Container, styled, ThemeProvider } from '@mui/material';
+import { Container, styled } from '@mui/material';
 import { Outlet } from 'react-router';
 import Navbar from './components/Layout/Navbar';
-import { theme } from './styles/theme';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(4),
@@ -9,12 +8,12 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Navbar />
       <StyledContainer maxWidth='md'>
         <Outlet />
       </StyledContainer>
-    </ThemeProvider>
+    </>
   );
 }
 

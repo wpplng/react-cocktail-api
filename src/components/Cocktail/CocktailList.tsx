@@ -11,7 +11,7 @@ interface CocktailListProps {
 
 const StyledListItem = styled(ListItem)(() => ({
   padding: '0',
-  fontSize: '1.2rem',
+  fontSize: '1rem',
 }));
 
 const CocktailList = ({ results }: CocktailListProps): ReactElement => {
@@ -41,7 +41,6 @@ const CocktailList = ({ results }: CocktailListProps): ReactElement => {
           </StyledListItem>
         ))}
       </List>
-
       {results.length > itemsPerPage && (
         <Pagination results={results} page={page} onChange={handleSetPage} />
       )}
