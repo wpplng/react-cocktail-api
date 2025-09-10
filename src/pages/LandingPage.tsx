@@ -1,9 +1,20 @@
 import type { ReactElement } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
-import { Button, Container, Typography, Box } from '@mui/material';
-
+import { Box, Button, Container, Typography, styled } from '@mui/material';
 import type { ICocktail } from '../utilities/types';
 import CocktailCard from '../components/Cocktail/CocktailCard';
+
+const StyledContainer = styled(Container)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column',
+  marginTop: theme.spacing(4),
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  marginBottom: theme.spacing(3),
+}));
 
 const LandingPage = (): ReactElement => {
   const cocktail = useLoaderData() as ICocktail;
@@ -14,29 +25,19 @@ const LandingPage = (): ReactElement => {
   };
 
   return (
-    <Container
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        mt: 4,
-      }}
-    >
+    <StyledContainer>
       <Typography variant='h3' gutterBottom textAlign='center'>
         Cocktail Wiki
       </Typography>
-
-      <Button variant='contained' onClick={handleNewRandom} sx={{ mb: 3 }}>
+      <StyledButton variant='contained' onClick={handleNewRandom}>
         Get Random Cocktail
-      </Button>
-
+      </StyledButton>
       {cocktail && (
         <Box>
           <CocktailCard cocktail={cocktail} />
         </Box>
       )}
-    </Container>
+    </StyledContainer>
   );
 };
 

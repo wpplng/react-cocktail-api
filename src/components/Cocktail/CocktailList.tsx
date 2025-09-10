@@ -1,6 +1,6 @@
 import { useState, type ReactElement } from 'react';
 import type { ICocktail } from '../../utilities/types';
-import { Box, List, ListItem, ListItemButton } from '@mui/material';
+import { Box, List, ListItem, ListItemButton, styled } from '@mui/material';
 import { Link } from 'react-router';
 import { Pagination } from '../UI/Pagination';
 import { itemsPerPage } from '../../utilities/constants';
@@ -8,6 +8,11 @@ import { itemsPerPage } from '../../utilities/constants';
 interface CocktailListProps {
   results: ICocktail[];
 }
+
+const StyledListItem = styled(ListItem)(() => ({
+  padding: '0',
+  fontSize: '1.2rem',
+}));
 
 const CocktailList = ({ results }: CocktailListProps): ReactElement => {
   const [page, setPage] = useState(1);
@@ -25,7 +30,7 @@ const CocktailList = ({ results }: CocktailListProps): ReactElement => {
     <Box mt={3}>
       <List>
         {paginated.map((cocktail) => (
-          <ListItem key={cocktail.id} disablePadding>
+          <StyledListItem key={cocktail.id}>
             <ListItemButton
               component={Link}
               to={`/cocktail/${cocktail.id}`}
@@ -33,7 +38,7 @@ const CocktailList = ({ results }: CocktailListProps): ReactElement => {
             >
               {cocktail.name}
             </ListItemButton>
-          </ListItem>
+          </StyledListItem>
         ))}
       </List>
 

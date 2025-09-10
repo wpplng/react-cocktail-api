@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Pagination as MuiPagination } from '@mui/material';
+import { Pagination as MuiPagination, styled } from '@mui/material';
 import type { ICocktail } from '../../utilities/types';
 import { itemsPerPage } from '../../utilities/constants';
 
@@ -9,17 +9,20 @@ interface PaginationProps {
   onChange: (value: number) => void;
 }
 
+const StyledPagination = styled(MuiPagination)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+}));
+
 export const Pagination = ({
   results,
   page,
   onChange,
 }: PaginationProps): ReactElement => {
   return (
-    <MuiPagination
+    <StyledPagination
       count={Math.ceil(results.length / itemsPerPage)}
       page={page}
       onChange={(_, value) => onChange(value)}
-      sx={{ mt: 2 }}
     />
   );
 };

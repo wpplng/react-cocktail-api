@@ -38,4 +38,5 @@ const CocktailIngredients = ({
     </List>
   );
 };
+
 export default CocktailIngredients;
