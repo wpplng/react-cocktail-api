@@ -22,3 +22,9 @@ export interface IFavoritesContext {
   checkIfFavorite: (cocktail: ICocktail) => boolean;
   toggleFavorite: (cocktail: ICocktail) => void;
 }
+
+export interface INavElement {
+  id: number;
+  source: string;
+  name: string;
+}

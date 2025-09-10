@@ -2,6 +2,7 @@ import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import type { ReactElement } from 'react';
 import { NavLink } from 'react-router';
 import { navElements } from '../../utilities/constants';
+import type { INavElement } from '../../utilities/types';
 
 const Navbar = (): ReactElement => {
   return (
@@ -21,7 +22,7 @@ const Navbar = (): ReactElement => {
             Cocktail Wiki
           </Typography>
           <Box>
-            {navElements.map((el) => (
+            {navElements.map((el: INavElement) => (
               <Button
                 key={el.id}
                 color='inherit'
