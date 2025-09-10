@@ -3,7 +3,7 @@ import { IconButton } from '@mui/material';
 import Favorite from '@mui/icons-material/Favorite';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import { useFavorites } from '../../context/useFavorites';
-import type { ICocktail } from '../../utilities/types';
+import type { ICocktail, IFavoritesContext } from '../../utilities/types';
 
 interface FavoriteIconToggleProps {
   cocktail: ICocktail;
