@@ -8,19 +8,14 @@ import {
   Typography,
   Button,
 } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import type { ICocktail } from '../../utilities/types';
-import { useFavorites } from '../../context/useFavorites';
+import { FavoriteIconToggle } from '../UI/FavoriteIconToggle';
 
 interface CocktailCardProps {
   cocktail: ICocktail;
 }
 
 const CocktailCard = ({ cocktail }: CocktailCardProps): ReactElement => {
-  const { toggleFavorite, checkIfFavorite } =
-    useFavorites() as IFavoritesContext;
-
   return (
     <Card sx={{ maxWidth: 345, margin: 'auto' }}>
       <CardMedia
@@ -40,11 +35,7 @@ const CocktailCard = ({ cocktail }: CocktailCardProps): ReactElement => {
           <Typography variant='h6' marginRight='1rem'>
             {cocktail.name}
           </Typography>
-          {checkIfFavorite(cocktail) ? (
-            <FavoriteIcon onClick={() => toggleFavorite(cocktail)} />
-          ) : (
-            <FavoriteBorderIcon onClick={() => toggleFavorite(cocktail)} />
-          )}
+          <FavoriteIconToggle cocktail={cocktail} />
         </Box>
 
         <Typography variant='body2' color='text.secondary'>

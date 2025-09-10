@@ -12,13 +12,10 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useFavorites } from '../context/useFavorites';
+import { FavoriteIconToggle } from '../components/UI/FavoriteIconToggle';
 
 const CocktailInfoPage = (): ReactElement => {
   const cocktail = useLoaderData() as ICocktail;
-  const { toggleFavorite, checkIfFavorite } = useFavorites();
   const location = useLocation();
 
   if (!location.state) {
@@ -45,17 +42,7 @@ const CocktailInfoPage = (): ReactElement => {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
             <Typography variant='h4'>{cocktail.name}</Typography>
 
-            {checkIfFavorite(cocktail) ? (
-              <FavoriteIcon
-                fontSize='large'
-                onClick={() => toggleFavorite(cocktail)}
-              />
-            ) : (
-              <FavoriteBorderIcon
-                fontSize='large'
-                onClick={() => toggleFavorite(cocktail)}
-              />
-            )}
+            <FavoriteIconToggle cocktail={cocktail} fontSize='large' />
           </Box>
 
           <Typography variant='subtitle1' color='text.secondary' gutterBottom>

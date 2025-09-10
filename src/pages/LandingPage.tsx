@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import { Button, Container, Typography, Box } from '@mui/material';
+
 import type { ICocktail } from '../utilities/types';
 import CocktailCard from '../components/Cocktail/CocktailCard';
 
