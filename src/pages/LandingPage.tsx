@@ -14,6 +14,8 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 
 const StyledButton = styled(Button)(({ theme }) => ({
   marginBottom: theme.spacing(3),
+  borderRadius: '20px',
+  padding: '1rem 0.8rem',
 }));
 
 const LandingPage = (): ReactElement => {
