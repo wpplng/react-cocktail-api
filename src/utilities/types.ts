@@ -1,3 +1,5 @@
+export type AppRoute = '/' | '/favorites' | '/search';
+
 export interface IIngredient {
   ingredient: string;
   measure: string | null;
@@ -25,6 +27,6 @@ export interface IFavoritesContext {
 
 export interface INavElement {
   id: number;
-  source: string;
+  source: AppRoute;
   name: string;
 }
