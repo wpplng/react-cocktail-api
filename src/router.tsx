@@ -9,8 +9,8 @@ import FavoritesPage from './pages/FavoritesPage';
 import {
   cocktailByIdLoader,
   landingPageLoader,
+  searchCocktailsLoader,
 } from './loaders/cocktailLoaders';
-import { searchCocktailsAction } from './loaders/searchAction';
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
       {
         path: 'search',
         element: <SearchPage />,
-        action: searchCocktailsAction,
+        loader: searchCocktailsLoader,
       },
       {
         path: 'cocktail/:id',
