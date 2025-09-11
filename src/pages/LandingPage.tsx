@@ -1,5 +1,9 @@
 import type { ReactElement } from 'react';
-import { useLoaderData, useNavigate } from 'react-router';
+import {
+  useLoaderData,
+  useNavigate,
+  type NavigateFunction,
+} from 'react-router';
 import { Box, Button, Container, Typography, styled } from '@mui/material';
 import type { ICocktail } from '../utilities/types';
 import CocktailCard from '../components/Cocktail/CocktailCard';
@@ -20,7 +24,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 const LandingPage = (): ReactElement => {
   const cocktail = useLoaderData() as ICocktail;
-  const navigate = useNavigate();
+  const navigate = useNavigate() as NavigateFunction;
 
   const handleNewRandom = () => {
     navigate(0);

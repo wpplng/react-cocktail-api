@@ -15,7 +15,7 @@ const StyledListItem = styled(ListItem)(() => ({
 }));
 
 const CocktailList = ({ results }: CocktailListProps): ReactElement => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
 
   const paginated = results.slice(
     (page - 1) * itemsPerPage,
@@ -27,7 +27,7 @@ const CocktailList = ({ results }: CocktailListProps): ReactElement => {
   };
 
   return (
-    <Box mt={3}>
+    <Box mt={1}>
       <List>
         {paginated.map((cocktail) => (
           <StyledListItem key={cocktail.id}>

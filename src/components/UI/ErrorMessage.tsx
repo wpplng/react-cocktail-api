@@ -7,12 +7,17 @@ import {
   DialogTitle,
 } from '@mui/material';
 import { useState, type ReactElement } from 'react';
-import { isRouteErrorResponse, useNavigate, useRouteError } from 'react-router';
+import {
+  isRouteErrorResponse,
+  useNavigate,
+  useRouteError,
+  type NavigateFunction,
+} from 'react-router';
 
 export const ErrorMessage = (): ReactElement => {
   const error = useRouteError();
-  const navigate = useNavigate();
-  const [open, setOpen] = useState(true);
+  const navigate = useNavigate() as NavigateFunction;
+  const [open, setOpen] = useState<boolean>(true);
 
   let message = 'Unknown error';
   if (isRouteErrorResponse(error)) {
