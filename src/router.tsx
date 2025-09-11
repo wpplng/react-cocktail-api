@@ -3,16 +3,15 @@ import App from './App';
 import LandingPage from './pages/LandingPage';
 import SearchPage from './pages/SearchPage';
 import CocktailInfoPage from './pages/CocktailInfoPage';
-import {
-  fetchCocktailById,
-  fetchRandomCocktail,
-  searchCocktails,
-} from './api/cocktailApi';
 import { Loader } from './components/UI/Loader';
 import { ErrorMessage } from './components/UI/ErrorMessage';
 import FavoritesPage from './pages/FavoritesPage';
+import {
+  cocktailByIdLoader,
+  landingPageLoader,
+} from './loaders/cocktailLoaders';
+import { searchCocktailsAction } from './loaders/searchAction';
 
-// FIXME: Move loaders and actions to another file
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -23,9 +22,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <LandingPage />,
-        loader: async () => {
-          return await fetchRandomCocktail();
-        },
+        loader: landingPageLoader,
       },
       {
         path: 'favorites',
@@ -34,20 +31,12 @@ export const router = createBrowserRouter([
       {
         path: 'search',
         element: <SearchPage />,
-        action: async ({ request }: { request: Request }) => {
-          const formData = await request.formData();
-          const query = formData.get('query') as string;
-          if (!query) return [];
-          return await searchCocktails(query);
-        },
+        action: searchCocktailsAction,
       },
       {
         path: 'cocktail/:id',
         element: <CocktailInfoPage />,
-        loader: async ({ params }) => {
-          if (!params.id) throw new Error('Missing cocktail id');
-          return await fetchCocktailById(params.id);
-        },
+        loader: cocktailByIdLoader,
       },
     ],
   },
