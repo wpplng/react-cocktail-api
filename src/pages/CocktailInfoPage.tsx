@@ -11,7 +11,7 @@ import {
   styled,
 } from '@mui/material';
 import CocktailIngredients from '../components/Cocktail/CocktailIngredients';
-import { CocktailHeader } from '../components/Cocktail/CocktailHeader';
+import CocktailHeader from '../components/Cocktail/CocktailHeader';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),

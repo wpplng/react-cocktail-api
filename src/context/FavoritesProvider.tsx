@@ -16,12 +16,14 @@ export const FavoritesProvider = ({ children }: FavoritesProviderProps) => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
+  // not in use right now but keeping for future possible implementations
   const addFavorite = (cocktail: ICocktail): void => {
     setFavorites((prev) =>
       prev.some((c) => c.id === cocktail.id) ? prev : [...prev, cocktail]
     );
   };
 
+  // not in use right now but keeping for future possible implementations
   const removeFavorite = (id: string): void => {
     setFavorites((prev) => prev.filter((c) => c.id !== id));
   };

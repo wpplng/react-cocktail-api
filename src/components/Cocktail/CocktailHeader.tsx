@@ -13,9 +13,7 @@ const HeaderBox = styled(Box)(() => ({
   gap: 2,
 }));
 
-export const CocktailHeader = ({
-  cocktail,
-}: CocktailHeaderProps): ReactElement => {
+const CocktailHeader = ({ cocktail }: CocktailHeaderProps): ReactElement => {
   return (
     <HeaderBox>
       <Typography variant='h4'>{cocktail.name}</Typography>
@@ -23,3 +21,5 @@ export const CocktailHeader = ({
     </HeaderBox>
   );
 };
+
+export default CocktailHeader;
