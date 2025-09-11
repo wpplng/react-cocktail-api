@@ -9,6 +9,7 @@ import {
 import {
   Box,
   Checkbox,
+  Divider,
   FormControlLabel,
   IconButton,
   Typography,
@@ -19,15 +20,28 @@ import type { ICocktail } from '../utilities/types';
 import { Loader } from '../components/UI/Loader';
 import CocktailList from '../components/Cocktail/CocktailList';
 
-const StyledInput = styled('input')(() => ({
-  marginRight: '0.2rem',
+const StyledFlexBox = styled(Box)(() => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+}));
+
+const StyledInput = styled('input')(({ theme }) => ({
   border: '1px solid lightGray',
   borderRadius: '20px',
   padding: '1rem 0.8rem',
+  width: '250px',
+  marginRight: theme.spacing(3),
 }));
 
-const StyledFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
-  marginLeft: theme.spacing(2),
+const StyledFormControlLabel = styled(FormControlLabel)(() => ({
+  '& .MuiFormControlLabel-label': {
+    fontSize: '0.875rem',
+  },
+}));
+
+const StyledDivider = styled(Divider)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(2),
 }));
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
@@ -52,27 +66,32 @@ const SearchPage = (): ReactElement => {
         Search Cocktails
       </Typography>
       <Form method='get'>
-        <StyledInput
-          type='text'
-          name='query'
-          placeholder='Search by name'
-          defaultValue={searchParams.get('query') ?? ''}
-        />
-        <StyledFormControlLabel
-          control={
-            <Checkbox
-              name='nonAlcoholic'
-              value='true'
-              checked={nonAlcoholic}
-              onChange={(e) => setNonAlcoholic(e.target.checked)}
-            />
-          }
-          label='Show only non-alcoholic'
-        />
-        <IconButton type='submit'>
-          <SearchIcon />
-        </IconButton>
+        <StyledFlexBox>
+          <StyledInput
+            type='text'
+            name='query'
+            placeholder='Search by name'
+            defaultValue={searchParams.get('query') ?? ''}
+          />
+          <StyledFormControlLabel
+            control={
+              <Checkbox
+                name='nonAlcoholic'
+                value='true'
+                checked={nonAlcoholic}
+                onChange={(e) => setNonAlcoholic(e.target.checked)}
+              />
+            }
+            label='Show only non-alcoholic'
+          />
+          <IconButton type='submit' size='large' color='primary'>
+            <SearchIcon />
+          </IconButton>
+        </StyledFlexBox>
       </Form>
+
+      <StyledDivider />
+
       {navigation.state === 'loading' && <Loader />}
       {results.length > 0 && <CocktailList results={results} />}
       {results.length === 0 &&
