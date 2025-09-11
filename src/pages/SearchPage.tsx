@@ -1,6 +1,18 @@
-import { type ReactElement } from 'react';
-import { Form, useActionData, useNavigation } from 'react-router';
-import { Box, IconButton, Typography, styled } from '@mui/material';
+import { useState, type ReactElement } from 'react';
+import {
+  Form,
+  useActionData,
+  useNavigation,
+  type Navigation,
+} from 'react-router';
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  IconButton,
+  Typography,
+  styled,
+} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import type { ICocktail } from '../utilities/types';
 import { Loader } from '../components/UI/Loader';
@@ -13,13 +25,21 @@ const StyledInput = styled('input')(() => ({
   padding: '1rem 0.8rem',
 }));
 
+const StyledFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+}));
+
 const StyledTypography = styled(Typography)(({ theme }) => ({
   marginTop: theme.spacing(2),
 }));
 
 const SearchPage = (): ReactElement => {
   const results = (useActionData() as ICocktail[]) || [];
-  const navigation = useNavigation();
+  const navigation = useNavigation() as Navigation;
+  const [showNonAlcoholic, setShowNonAlcoholic] = useState<boolean>(false);
+  const filteredResults: ICocktail[] = showNonAlcoholic
+    ? results.filter((c) => !c.alcoholic)
+    : results;
 
   return (
     <Box>
@@ -32,8 +52,20 @@ const SearchPage = (): ReactElement => {
           <SearchIcon />
         </IconButton>
       </Form>
+      {results.length > 0 && (
+        <StyledFormControlLabel
+          control={
+            <Checkbox
+              checked={showNonAlcoholic}
+              onChange={(e) => setShowNonAlcoholic(e.target.checked)}
+            />
+          }
+          label='Show only non-alcoholic'
+          sx={{ mt: 2 }}
+        />
+      )}
       {navigation.state === 'submitting' && <Loader />}
-      {results.length > 0 && <CocktailList results={results} />}
+      {filteredResults.length > 0 && <CocktailList results={filteredResults} />}
       {results.length === 0 && navigation.state === 'idle' && (
         <StyledTypography>Try searching for a cocktail above</StyledTypography>
       )}
